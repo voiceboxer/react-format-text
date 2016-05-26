@@ -1,0 +1,53 @@
+{
+  "name": "react-format-text",
+  "version": "1.0.0",
+  "description": "Simple link and newline text formatting for react",
+  "main": "dist/index.js",
+  "scripts": {
+    "watch": "babel index.js -d dist -w",
+    "build": "babel index.js -d dist",
+    "test-watch": "npm run watch & babel test/index.js -d dist -w",
+    "test-build": "npm run build && babel test/index.js -d dist",
+    "demo-watch": "wzrd demo/index.js:demo/bundle.js -- -t [ babelify --presets [ es2015 react ] ] -t brfs",
+    "demo-build": "browserify demo/index.js -o demo/bundle.js -t [ babelify --presets [ es2015 react ] ] -t brfs",
+    "test": "tape dist/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voiceboxer/react-format-text.git"
+  },
+  "keywords": [
+    "react",
+    "text",
+    "string",
+    "format",
+    "link",
+    "newline"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voiceboxer/react-format-text/issues"
+  },
+  "homepage": "https://github.com/voiceboxer/react-format-text#readme",
+  "dependencies": {
+    "browserify": "^13.0.1",
+    "linkify-it": "^1.2.1",
+    "tlds": "^1.121.0",
+    "wzrd": "^1.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "brfs": "^1.4.3",
+    "jsdom": "^9.2.0",
+    "react": "^15.1.0",
+    "react-addons-test-utils": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "tape": "^4.5.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0"
+  }
+}

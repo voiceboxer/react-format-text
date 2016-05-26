@@ -1,0 +1,4 @@
+test
+dist/test
+.babelrc
+demo/bundle.js
