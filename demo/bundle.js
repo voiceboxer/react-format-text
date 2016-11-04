@@ -71,7 +71,7 @@ var tlds = require('tlds');
 
 linkify.tlds(tlds);
 
-var format = function format(str) {
+var format = function format(str, options) {
   var matches = linkify.match(str) || [];
   var index = 0;
   var elements = [];
@@ -87,14 +87,15 @@ var format = function format(str) {
 
   matches.forEach(function (match, i) {
     var part = str.slice(index, match.index);
-    var target = /^http(s)?:/.test(match.url) ? '_blank' : null;
+    var target = 'target' in options ? options.target : /^http(s)?:/.test(match.url) ? '_blank' : null;
+    var rel = 'rel' in options ? options.rel : target === '_blank' ? 'noopener noreferrer' : null;
 
     index = match.lastIndex;
 
     newlines(part, i);
     elements.push(React.createElement(
       'a',
-      { key: i, target: target, href: match.url },
+      { key: i, target: target, rel: rel, href: match.url },
       match.text
     ));
   });
@@ -108,7 +109,9 @@ module.exports = React.createClass({
   displayName: 'exports',
 
   propTypes: {
-    children: React.PropTypes.string
+    children: React.PropTypes.string,
+    target: React.PropTypes.string,
+    rel: React.PropTypes.string
   },
 
   render: function render() {
@@ -117,7 +120,7 @@ module.exports = React.createClass({
     return React.createElement(
       'span',
       null,
-      text && format(text)
+      text && format(text, this.props)
     );
   }
 });
