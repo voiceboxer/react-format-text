@@ -4,7 +4,7 @@ var tlds = require('tlds');
 
 linkify.tlds(tlds);
 
-var format = function(str) {
+var format = function(str, options) {
   var matches = linkify.match(str) || [];
   var index = 0;
   var elements = [];
@@ -20,12 +20,15 @@ var format = function(str) {
 
   matches.forEach(function(match, i) {
     var part = str.slice(index, match.index);
-    var target = (/^http(s)?:/).test(match.url) ? '_blank' : null;
+    var target = ('target' in options) ? options.target :
+      ((/^http(s)?:/).test(match.url) ? '_blank' : null);
+    var rel = ('rel' in options) ? options.rel :
+      (target === '_blank' ? 'noopener noreferrer' : null);
 
     index = match.lastIndex;
 
     newlines(part, i);
-    elements.push(<a key={i} target={target} href={match.url}>{match.text}</a>);
+    elements.push(<a key={i} target={target} rel={rel} href={match.url}>{match.text}</a>);
   });
 
   newlines(str.slice(index), matches.length);
@@ -35,14 +38,16 @@ var format = function(str) {
 
 module.exports = React.createClass({
   propTypes: {
-    children: React.PropTypes.string
+    children: React.PropTypes.string,
+    target: React.PropTypes.string,
+    rel: React.PropTypes.string
   },
 
   render: function() {
     var text = this.props.children;
 
     return (
-      <span>{text && format(text)}</span>
+      <span>{text && format(text, this.props)}</span>
     );
   }
 });

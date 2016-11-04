@@ -81,6 +81,7 @@ test('text with link', function(t) {
   t.equal(a[0].textContent, 'http://example.com');
   t.ok(/^http:\/\/example.com/.test(a[0].href), 'should match');
   t.equal(a[0].target, '_blank');
+  t.equal(a[0].rel, 'noopener noreferrer');
   t.deepEqual(contents, ['Hello ', 'http://example.com', ' World']);
 
   t.end();
@@ -120,7 +121,28 @@ test('text with newlines and link', function(t) {
   t.equal(a[0].textContent, 'http://example.com');
   t.ok(/^http:\/\/example.com/.test(a[0].href), 'should match');
   t.equal(a[0].target, '_blank');
+  t.equal(a[0].rel, 'noopener noreferrer');
   t.deepEqual(contents, ['Hello', 'http://example.com', 'World']);
+
+  t.end();
+});
+
+test('text with link and provided props', function(t) {
+  var text = ReactTestUtils.renderIntoDocument(
+    <Text target="_self" rel="external">{'http://example.com'}</Text>
+  );
+
+  var element = ReactDOM.findDOMNode(text);
+  var a = element.querySelectorAll('a');
+  var contents = textContent(element);
+
+  t.equal(element.tagName, 'SPAN');
+  t.equal(a.length, 1);
+  t.equal(a[0].textContent, 'http://example.com');
+  t.ok(/^http:\/\/example.com/.test(a[0].href), 'should match');
+  t.equal(a[0].target, '_self');
+  t.equal(a[0].rel, 'external');
+  t.deepEqual(contents, ['http://example.com']);
 
   t.end();
 });
