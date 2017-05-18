@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 var linkify = require('linkify-it')();
 var tlds = require('tlds');
 
@@ -37,7 +38,7 @@ var format = function(str, options) {
   return elements;
 };
 
-module.exports = React.createClass({
+module.exports = createReactClass({
   propTypes: {
     children: PropTypes.string,
     target: PropTypes.string,

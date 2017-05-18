@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/voiceboxer/react-format-text#readme",
   "dependencies": {
+    "create-react-class": "^15.5.3",
     "linkify-it": "^1.2.1",
     "prop-types": "^15.5.10",
     "tlds": "^1.121.0"
