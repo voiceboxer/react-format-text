@@ -2,13 +2,14 @@ var qs = require('querystring');
 var fs = require('fs');
 var React = require('react');
 var ReactDOM = require('react-dom');
+var createReactClass = require('create-react-class');
 
 var Text = require('../index');
 
 var query = qs.parse(window.location.search.replace(/^\?/, ''));
 var initial = query.t || fs.readFileSync(__dirname + '/sample.txt', 'utf-8');
 
-var App = React.createClass({
+var App = createReactClass({
   getInitialState: function() {
     return { text: initial };
   },
