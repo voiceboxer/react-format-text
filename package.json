@@ -1,6 +1,6 @@
 {
   "name": "react-format-text",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simple link and newline text formatting for react",
   "main": "dist/index.js",
   "scripts": {
