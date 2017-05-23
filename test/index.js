@@ -1,7 +1,7 @@
 var test = require('tape');
 var jsdom = require('jsdom');
 var React = require('react');
-var ReactTestUtils = require('react-addons-test-utils');
+var ReactTestUtils = require('react-dom/test-utils');
 var ReactDOM = require('react-dom');
 
 var Text = require('../index');
